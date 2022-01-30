@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            practice
+        </title>
+        </script>
+    </head>
+    <body>
+        <form class = "grid" action ="/result" method="POST">
+            <center>
+                {% if name %}
+                <h3 style="color: blue;">Hello {{name}},How are you?</h3>
+                {% endif %}
+            </center>
+            <label for ="Name">Enter your Name:</label>
+            <input type="text" name="name" id = "name">
+            <center><input type="Submit" class="file_submit"></center>
+
+        </form>
+    </body>
+</html>
