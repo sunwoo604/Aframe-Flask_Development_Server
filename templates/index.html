@@ -4,19 +4,25 @@
         <title>
             practice
         </title>
-        </script>
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     </head>
     <body>
+        <a-scene>
+            {% for val in out %}
+            <a-sphere position="{{loop.index*2}} {{val}} -10"
+            color="#AA0000"></a-sphere>
+            {% endfor %}
+        </a-scene>
+        <!--
         <form class = "grid" action ="/result" method="POST">
             <center>
                 {% if name %}
-                <h3 style="color: blue;">Hello {{name}},How are you?</h3>
                 {% endif %}
             </center>
             <label for ="Name">Enter your Name:</label>
             <input type="text" name="name" id = "name">
             <center><input type="Submit" class="file_submit"></center>
-
         </form>
+        -->
     </body>
 </html>
