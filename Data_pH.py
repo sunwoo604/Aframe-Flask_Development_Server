@@ -8,7 +8,7 @@ import math
 import numpy as np
 
 def DataPh():
-    spec_names = {'A', 'H', 'AH', 'H2A', 'OH'}
+    spec_names = ['A', 'H', 'AH', 'H2A', 'OH']
     Model = [[1, 0,1,1,0], [0,1,1,2,-1]]
     log_beta = np.array([0, 0, 10, 17, -14.0744])
 
@@ -40,7 +40,7 @@ def DataPh():
         for j in c:
             temp.append(j[i])
         out.append(temp)
-    return out
+    return (out,spec_names)
     
 # def add(a, lst):
 #     for i in range(len(lst)):
