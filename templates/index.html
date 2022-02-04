@@ -11,10 +11,13 @@
             <a-plane color="#999999"
             rotation ="-90 0 0 "
             scale="100 100 1"></a-plane>
-            {% for val in out %}
-            <a-sphere position="{{loop.index*2}} {{val}} -10"
+            {% for lst in out %}
+            {% set var = loop.index %}
+            {% for val in lst %}
+            <a-sphere position="{{loop.index*0.05}} {{val*5000}} {{var*-5}}"
             color="#AA0000"
-            radius="0.3"></a-sphere>
+            radius="0.05"></a-sphere>
+            {% endfor %}
             {% endfor %}
         </a-scene>
         <!--

@@ -34,8 +34,13 @@ def DataPh():
     for i in range(nvol):
         c[i, :] = NewtonRaphson(Model, beta, C_tot[i, :],c_comp_guess, i)
         c_comp_guess=np.array([c[i,:ncomp]])
-    print(c)
-    print(nvol)
+    out=[]
+    for i in range(len(c[0])):
+        temp=[]
+        for j in c:
+            temp.append(j[i])
+        out.append(temp)
+    return out
     
 # def add(a, lst):
 #     for i in range(len(lst)):
@@ -98,5 +103,4 @@ def NewtonRaphson(Model, beta, c_tot,c, i):
         print("No convergence at C_spec({0}, :)\n".format(i))
     return c_spec
 
-DataPh()
 

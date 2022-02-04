@@ -1,13 +1,13 @@
 from flask import Flask, render_template,request
 
-import sample
+import Data_pH as dp
 
 app=Flask(__name__)
 
 @app.route("/")
 @app.route("/home")
 def home():
-    output=sample.sample_func()
+    output=dp.DataPh()
     return render_template("index.html", out=output)
 
 @app.route("/result", methods=['POST','GET'])
