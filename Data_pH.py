@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[36]:
+
 
 import math
 import numpy as np
@@ -17,7 +22,7 @@ def DataPh():
     v0 = 0.05
     v_added = []
     v_tot = []
-    for i in np.arange(0, 0.005, 0.000005):
+    for i in np.arange(0, 0.005+0.000005, 0.000005):
         v_added.append(i)
         v_tot.append(v0+i)
     nvol = len(v_added)
@@ -94,3 +99,4 @@ def NewtonRaphson(Model, beta, c_tot,c, i):
     return c_spec
 
 DataPh()
+
