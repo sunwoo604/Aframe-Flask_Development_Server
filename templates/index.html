@@ -8,9 +8,13 @@
     </head>
     <body>
         <a-scene>
+            <a-plane color="#999999"
+            rotation ="-90 0 0 "
+            scale="100 100 1"></a-plane>
             {% for val in out %}
             <a-sphere position="{{loop.index*2}} {{val}} -10"
-            color="#AA0000"></a-sphere>
+            color="#AA0000"
+            radius="0.3"></a-sphere>
             {% endfor %}
         </a-scene>
         <!--
