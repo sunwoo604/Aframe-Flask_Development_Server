@@ -40,7 +40,16 @@ def DataPh():
         for j in c:
             temp.append(j[i])
         out.append(temp)
-    return (out,spec_names)
+    pH_calc = []
+    for i in c:
+        pH_calc.append(-math.log10(i[1]))
+    sig_R=0.002
+    np.random.seed(0)
+    random_numbers = np.random.randn(len(pH_calc))
+    pH_meas = []
+    for i in range(len(random_numbers)):
+        pH_meas.append(pH_calc[i]+(sig_R*random_numbers[i]))
+    return (out,spec_names,pH_meas)
     
 # def add(a, lst):
 #     for i in range(len(lst)):
@@ -103,4 +112,4 @@ def NewtonRaphson(Model, beta, c_tot,c, i):
         print("No convergence at C_spec({0}, :)\n".format(i))
     return c_spec
 
-
+DataPh()

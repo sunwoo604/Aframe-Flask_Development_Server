@@ -13,12 +13,12 @@
             scale="1000 1000 1"></a-plane>
             {% for lst in out[0] %}
             {% set var = loop.index %}
-            <a-text id="temp" value="{{out[1][loop.index-1]}}" position="-2 1 {{var*-5}}"
+            <a-text id="temp" value="{{out[1][loop.index-1]}}" position="-1 1 {{var*-5}}"
             geometry="primitive: plane; width: 3; height: 2" align="center"
             height="20"
             width="20"></a-text>
             {% for val in lst %}
-            <a-sphere position="{{loop.index*0.05}} {{val*5000}} {{var*-5}}"
+            <a-sphere position="{{out[2][loop.index-1]*2}} {{val*1000}} {{var*-5}}"
             color="#AA0000"
             radius="0.05"></a-sphere>
             {% endfor %}
