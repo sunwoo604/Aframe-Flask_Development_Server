@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# In[36]:
-
-
 import math
 import numpy as np
 
@@ -49,7 +45,25 @@ def DataPh():
     pH_meas = []
     for i in range(len(random_numbers)):
         pH_meas.append(pH_calc[i]+(sig_R*random_numbers[i]))
-    return (out,spec_names,pH_meas)
+    max_out_ls = []
+    min_out_ls = []
+    for i in out:
+        max_out_ls.append(max(i))
+        min_out_ls.append(min(i))
+    max_out = max(max_out_ls)
+    min_out = min(min_out_ls)
+    stepy = math.ceil((max_out - min_out)/0.002)+1
+    yaxis = []
+    for i in range(stepy):
+        yaxis.append(0.002*i)
+    max_pH = max(pH_meas)
+    min_pH = min(pH_meas)
+    stepx = math.ceil((max_pH - min_pH)/5)+1
+    xaxis = []
+    for i in range(stepx):
+        xaxis.append(5*i)
+    return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out)
+
     
 # def add(a, lst):
 #     for i in range(len(lst)):
@@ -112,4 +126,6 @@ def NewtonRaphson(Model, beta, c_tot,c, i):
         print("No convergence at C_spec({0}, :)\n".format(i))
     return c_spec
 
-DataPh()
+
+
+
