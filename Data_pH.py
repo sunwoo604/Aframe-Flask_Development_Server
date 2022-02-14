@@ -51,18 +51,22 @@ def DataPh():
         max_out_ls.append(max(i))
         min_out_ls.append(min(i))
     max_out = max(max_out_ls)
-    min_out = min(min_out_ls)
+    min_out = math.floor(min(min_out_ls))
     stepy = math.ceil((max_out - min_out)/0.002)+1
     yaxis = []
     for i in range(stepy):
         yaxis.append(0.002*i)
-    max_pH = max(pH_meas)
-    min_pH = min(pH_meas)
-    stepx = math.ceil((max_pH - min_pH)/5)+1
+    max_out=max(yaxis)
+    max_pH = math.ceil(max(pH_meas))
+    min_pH = math.ceil(min(pH_meas))
+    stepx = math.ceil((max_pH - min_pH)/1)+1
     xaxis = []
     for i in range(stepx):
-        xaxis.append(5*i)
-    return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out)
+        xaxis.append(i+min_pH)
+    max_pH=max(xaxis)
+    xscale=10/(max_pH-min_pH)
+    yscale=10/(max_out-min_out)
+    return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out, xscale, yscale, xaxis, yaxis)
 
     
 # def add(a, lst):
@@ -126,6 +130,6 @@ def NewtonRaphson(Model, beta, c_tot,c, i):
         print("No convergence at C_spec({0}, :)\n".format(i))
     return c_spec
 
-
+print(DataPh()[6])
 
 
