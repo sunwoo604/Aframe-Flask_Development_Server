@@ -45,6 +45,7 @@ def DataPh():
     pH_meas = []
     for i in range(len(random_numbers)):
         pH_meas.append(pH_calc[i]+(sig_R*random_numbers[i]))
+    #calculating the axis value
     max_out_ls = []
     min_out_ls = []
     for i in out:
@@ -63,10 +64,24 @@ def DataPh():
     xaxis = []
     for i in range(stepx):
         xaxis.append(i+min_pH)
+    #calculating the position sclae
     max_pH=max(xaxis)
     xscale=10/(max_pH-min_pH)
     yscale=10/(max_out-min_out)
-    return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out, xscale, yscale, xaxis, yaxis)
+    points=[]
+    #scales for actual trend
+    scales=[]
+    for i in out:
+        scales.append(10/(max(i)-min(i)))
+    #string value for a-lines
+    for i in range(len(scales)):
+        temp=""
+        for j in range(len(pH_meas)):
+            if(j!=0):
+                temp+=", "
+            temp+=str((pH_meas[j]-min_pH)*xscale)+" "+str((out[i][j]-min_out)*scales[i])+" "+str(0)
+        points.append(temp)
+    return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out, xscale, yscale, xaxis, yaxis, points)
 
     
 # def add(a, lst):
@@ -130,6 +145,5 @@ def NewtonRaphson(Model, beta, c_tot,c, i):
         print("No convergence at C_spec({0}, :)\n".format(i))
     return c_spec
 
-print(DataPh()[6])
 
 
