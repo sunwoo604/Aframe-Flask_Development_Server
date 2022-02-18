@@ -1,11 +1,10 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template, request
 
 import Data_pH as dp
 
 app=Flask(__name__)
 
 @app.route("/")
-@app.route("/home")
 def home():
     output=dp.DataPh()
     return render_template("index.html", out=output)

@@ -1,139 +1,152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            practice
-        </title>
-        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-        <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
-        <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js%22%3E"></script>
-        <script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>
-        <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
-        <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js%22%3E"></script>
-        <script src="dist/aframe-material.js"></script>
-        <script type="text/javascript">AFRAME.ASSETS_PATH = "./assets";</script>
-    </head>
-    <body>
-        <a-scene>
-            <a-camera>
-                <a-entity cursor position="0 0 5"
-                geometry="primitive: sphere; radius:0.005" material="shader: flat; opacity: 0.5">
-                <!--
-                <a-gui-cursor id="cursor"
-						  raycaster="objects: [gui-interactable]"
-						  fuse="true" fuse-timeout="2000"
-						  color="#ECEFF1"
-						  hover-color="#CFD8DC"
-						  active-color="#607D8B"
-						  design="ring" >
-                </a-gui-cursor>
-            -->
-                </a-entity>
-            </a-camera>
-            <a-keyboard physical-keyboard="true"></a-keyboard>
-            <a-input position="-0.7 1 -2.5" placeholder="Enter Here" color="black" width="1"></a-input>
-            <a-plane color="#999999"
-            rotation ="-90 0 0 "
-            scale="1000 1000 1"></a-plane>
-            {% for mol in out[1] %}
-                <a-gui-button 
-                    id="button{{mol}}"
-                    position="{{loop.index}} 1 1"
-                    value="show trend for {{mol}}"
-                    onclick="{{mol}}trend">
-                </a-gui-button>
-            {% endfor %}
-            {% set xmin = 3 %}
-            {% set xmax = 4 %}
-            {% set ymin = 5 %}
-            {% set ymax = 6 %}
-            {% set points = 7 %}
-            {% set sc = namespace(xscale = out[7]) %}
-            {% set sc2 = namespace(yscale = out[8]) %}
-            {% set xstep = 9 %}
-            {% set ystep = 10 %}
-            {% set colorsets = ["#AA0000","#00AA00","#0000AA","#AAAA00", "#00AAAA"] %}
-            {% set ns = namespace(id=0) %}
+  <head>
+    <meta charset="utf-8">
+    <title>A-Frame Super Keyboard</title>
+    <script src="https://rawgit.com/aframevr/aframe/c4aa63e/dist/aframe-master.min.js"></script>
+    <script src="{{ url_for('static', filename = 'aframe-super-keyboard.min.js') }}"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>a
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+    
+    <script>
+      AFRAME.registerComponent('wood-keyboard', {
+        dependencies: ['super-keyboard'],
+        init: function(){
+          var model = { wrapCount: 35, inputOffsetY: 0.003, inputOffsetX: 0, img: "wood.png", layout: [{"key":"Insert", "x":0.023, "y":0.038, "w":0.956, "h":0.126}, {"key":" :-) ", "x":0.027, "y":0.214, "w":0.083, "h":0.148}, {"key":" :-O ", "x":0.124, "y":0.214, "w":0.083, "h":0.148}, {"key":" X-D ", "x":0.23, "y":0.214, "w":0.107, "h":0.148}, {"key":" ¯\\_('_')_/¯ ", "x":0.344, "y":0.214, "w":0.207, "h":0.148}, {"key":" ^_^ ", "x":0.563, "y":0.214, "w":0.114, "h":0.148}, {"key":"!", "x":0.686, "y":0.207, "w":0.079, "h":0.152}, {"key":"?", "x":0.766, "y":0.207, "w":0.079, "h":0.152}, {"key":"Delete", "x":0.865, "y":0.239, "w":0.108, "h":0.146}, {"key":"Enter", "x":0.866, "y":0.479, "w":0.108, "h":0.244}, {"key":"Escape", "x":0.883, "y":0.828, "w":0.078, "h":0.134}, {"key":"Shift", "x":0.021, "y":0.833, "w":0.068, "h":0.142}, {"key":" ", "x":0.266, "y":0.85, "w":0.415, "h":0.126}, {"key":"q", "x":0.049, "y":0.389, "w":0.079, "h":0.152}, {"key":"w", "x":0.128, "y":0.389, "w":0.079, "h":0.152}, {"key":"e", "x":0.208, "y":0.389, "w":0.079, "h":0.152}, {"key":"r", "x":0.287, "y":0.389, "w":0.08, "h":0.152}, {"key":"t", "x":0.368, "y":0.389, "w":0.079, "h":0.152}, {"key":"y", "x":0.447, "y":0.389, "w":0.079, "h":0.152}, {"key":"u", "x":0.526, "y":0.389, "w":0.079, "h":0.152}, {"key":"i", "x":0.606, "y":0.389, "w":0.08, "h":0.152}, {"key":"o", "x":0.686, "y":0.389, "w":0.079, "h":0.152}, {"key":"p", "x":0.766, "y":0.389, "w":0.079, "h":0.152}, {"key":"a", "x":0.097, "y":0.541, "w":0.08, "h":0.154}, {"key":"s", "x":0.176, "y":0.541, "w":0.08, "h":0.154}, {"key":"d", "x":0.256, "y":0.541, "w":0.08, "h":0.154}, {"key":"f", "x":0.336, "y":0.541, "w":0.079, "h":0.154}, {"key":"g", "x":0.415, "y":0.541, "w":0.08, "h":0.154}, {"key":"h", "x":0.495, "y":0.541, "w":0.079, "h":0.154}, {"key":"j", "x":0.575, "y":0.541, "w":0.079, "h":0.154}, {"key":"k", "x":0.654, "y":0.541, "w":0.08, "h":0.154}, {"key":"l", "x":0.734, "y":0.541, "w":0.08, "h":0.154}, {"key":"z", "x":0.177, "y":0.696, "w":0.079, "h":0.154}, {"key":"x", "x":0.256, "y":0.696, "w":0.08, "h":0.154}, {"key":"c", "x":0.336, "y":0.696, "w":0.079, "h":0.154}, {"key":"v", "x":0.415, "y":0.696, "w":0.08, "h":0.154}, {"key":"b", "x":0.495, "y":0.696, "w":0.08, "h":0.154}, {"key":"n", "x":0.575, "y":0.696, "w":0.079, "h":0.154}, {"key":"m", "x":0.654, "y":0.696, "w":0.08, "h":0.154}]};
+          this.el.components['super-keyboard'].addCustomModel('wood', model);
+          this.el.setAttribute('super-keyboard', {imagePath: '.', model: 'wood'});
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
 
-            {% for points in out[11] %}
-            <a-lines points="{{points}}"
-            color="{{colorsets[loop.index-1]}}"
-            gui-interactable="{{out[1][loop.index-1]}}trend"
-            visible="false">
-            </a-lines>
-            {% endfor %}
+      <a-entity id="rightHand" laser-controls="right"></a-entity>
+      <a-entity id="leftHand" laser-controls="left"></a-entity>
 
-            {% for lst in out[0] %}
-            {% set vr = namespace(var=loop.index) %}
-            <a-box color="black" height="20" width="0.02" depth="0.02" position="-1 0 {{vr.var*-5}}"></a-box>
-            <a-box color="black" height="10" width="0.02" depth="0.02" position="4 0 {{vr.var*-5}}" rotation="0 0 90"></a-box>
-            {% for x in out[xstep] %}
-            <a-text value="{{x}}" 
-            position="{{(x-out[xmin])*sc.xscale}} 0.2 {{vr.var*-5}}"
-            color="black" align="center"
-            height="5"
-            width="5"></a-text>
-            {% endfor %}
-            {% for y in out[ystep] %}
-            <a-text value="{{y}}" 
-            position="-1 {{(loop.index-1)*2}} {{vr.var*-5+0.5}}"
-            color="black" align="center"
-            height="5"
-            width="5"></a-text>
-            {% endfor %}
-            <a-text value="{{out[1][loop.index-1]}}" position="-5 1 {{vr.var*-5}}"
-                geometry="primitive: plane; width: 3; height: 2" material = "color: {{colorsets[vr.var-1]}}" align="center"
-                height="20"
-                width="20">
-            </a-text>
-            <a-box position="-5 1 {{(vr.var*-5)+0.5}}"
-                width="3"
+      <!-- Change hand to `#hand` for VR. -->
+        <a-plane color="#999999"
+        rotation ="-90 0 0 "
+        scale="1000 1000 1"></a-plane>
+        {% for mol in out[1] %}
+            <a-box 
+                id="button{{mol}}"
+                position="{{loop.index}} 1 1"
+                color="grey"
+                event-set__trendenter="_event: mouseenter; _target: #{{mol}}trend; visible: true"
+                event-set__trendleave="_event: mouseleave; _target: #{{mol}}trend; visible: false">
+                <a-text value="show trend \nfor {{mol}}"
+                position="0 0 0.5"
+                align="center"
                 height="2"
-                depth="2"
-                visible="false"
-                event-set__userenter="_event: cameraenter; _target: #button{{vr.var}}; visible: true"
-                event-set__userleave="_event: cameraleave; _target: #button{{vr.var}}; visible: false">
+                width="2"></a-text>
             </a-box>
-            <a-gui-button 
-                id="button{{vr.var}}"
-                position="-5 1 {{(vr.var*-5)+0.5}}"
-                value="show trend"
-                visible="false">
-            </a-gui-button>
-                {% for val in lst %}
-                {% set ns.id=ns.id+1 %}
-                <a-sphere id="ball{{ns.id}}"
-                position="{{(out[2][loop.index-1]-out[xmin])*sc.xscale}} {{val*sc2.yscale}} {{vr.var*-5}}"
+        {% endfor %}
+        {% set xmin = 3 %}
+        {% set xmax = 4 %}
+        {% set ymin = 5 %}
+        {% set ymax = 6 %}
+        {% set points = 7 %}
+        {% set sc = namespace(xscale = out[7]) %}
+        {% set sc2 = namespace(yscale = out[8]) %}
+        {% set xstep = 9 %}
+        {% set ystep = 10 %}
+        {% set colorsets = ["#AA0000","#00AA00","#0000AA","#AAAA00", "#00AAAA"] %}
+        {% set ns = namespace(id=0) %}
+        {% for points in out[11] %}
+        <a-lines id="{{out[1][loop.index-1]}}trend"
+        points="{{points}}"
+        color="{{colorsets[loop.index-1]}}"
+        visible="false">
+        </a-lines>
+        {% endfor %}
+
+
+        {% for lst in out[0] %}
+        {% set vr = namespace(var=loop.index) %}
+        <a-box color="black" height="20" width="0.02" depth="0.02" position="-1 0 {{vr.var*-5}}"></a-box>
+        <a-box color="black" height="10" width="0.02" depth="0.02" position="4 0 {{vr.var*-5}}" rotation="0 0 90"></a-box>
+        {% for x in out[xstep] %}
+        <a-text value="{{x}}" 
+        position="{{(x-out[xmin])*sc.xscale}} 0.2 {{vr.var*-5}}"
+        color="black" align="center"
+        height="5"
+        width="5"></a-text>
+        {% endfor %}
+        {% for y in out[ystep] %}
+        <a-text value="{{y}}" 
+        position="-1 {{(loop.index-1)*2}} {{vr.var*-5+0.5}}"
+        color="black" align="center"
+        height="5"
+        width="5"></a-text>
+        {% endfor %}
+        <a-text value="{{out[1][loop.index-1]}}" position="-5 1 {{vr.var*-5}}"
+            geometry="primitive: plane; width: 3; height: 2" material = "color: {{colorsets[vr.var-1]}}" align="center"
+            height="20"
+            width="20">
+        </a-text>
+        <a-box position="-5 1 {{(vr.var*-5)+0.5}}"
+            width="3"
+            height="2"
+            depth="2"
+            visible="false"
+            event-set__userenter="_event: cameraenter; _target: #button{{vr.var}}; visible: true"
+            event-set__userleave="_event: cameraleave; _target: #button{{vr.var}}; visible: false">
+        </a-box>
+        <a-gui-button 
+            id="button{{vr.var}}"
+            position="-5 1 {{(vr.var*-5)+0.5}}"
+            value="show trend"
+            visible="false">
+        </a-gui-button>
+            {% for val in lst %}
+            {% set ns.id=ns.id+1 %}
+            <a-sphere id="ball{{ns.id}}"
+            position="{{(out[2][loop.index-1]-out[xmin])*sc.xscale}} {{val*sc2.yscale}} {{vr.var*-5}}"
+            color="{{colorsets[vr.var-1]}}"
+            radius="0.05"
+            event-set__enter="_event: mouseenter; radius: 0.1"
+            event-set__leave="_event: mouseleave; radius: 0.05"
+            event-set__enter1="_event: mouseenter; _target: #data{{ns.id}}; visible: true"
+            event-set__leave1="_event: mouseleave; _target: #data{{ns.id}}; visible: false">
+                <a-text
+                id="data{{ns.id}}"
                 color="{{colorsets[vr.var-1]}}"
-                radius="0.05"
-                event-set__enter="_event: mouseenter; radius: 0.1"
-                event-set__leave="_event: mouseleave; radius: 0.05"
-                event-set__enter1="_event: mouseenter; _target: #data{{ns.id}}; visible: true"
-                event-set__leave1="_event: mouseleave; _target: #data{{ns.id}}; visible: false">
-                    <a-text
-                    id="data{{ns.id}}"
-                    color="{{colorsets[vr.var-1]}}"
-                    value="m: {{out[1][vr.var-1]}} ph: {{out[2][loop.index-1]}} c: {{val}}"
-                    geometry="primitive: plane; width: 4; height: 0.75"
-                    material = "color: {{colorsets[vr.var-1]}}"
-                    position="0 1 0"
-                    align="center"
-                    visible="false"></a-text>
-                    </a-text>
-                </a-sphere>
-                {% endfor %}
+                value="m: {{out[1][vr.var-1]}} ph: {{out[2][loop.index-1]}} c: {{val}}"
+                geometry="primitive: plane; width: 4; height: 0.75"
+                material = "color: {{colorsets[vr.var-1]}}"
+                position="0 1 0"
+                align="center"
+                visible="false"></a-text>
+                </a-text>
+            </a-sphere>
             {% endfor %}
-        </a-scene>
-        <!--
-        <form class = "grid" action ="/result" method="POST">
-            <center>
-                {% if name %}
-                {% endif %}
-            </center>
-            <label for ="Name">Enter your Name:</label>
-            <input type="text" name="name" id = "name">
-            <center><input type="Submit" class="file_submit"></center>
-        </form>
-        -->
-    </body>
+        {% endfor %}
+        <a-entity
+        id="keyboard"
+        super-keyboard="hand: #mouseCursor; imagePath:{{ url_for('static', filename = '') }}; keyColor: #fff; inputColor: #97f079; label: Hello! Please Enter Here:; labelColor: #c9b08b; keyPressColor: #fff; keyHoverColor: #3a3521; font: roboto; blinkingSpeed: 100; align: center;"
+        wood-keyboard
+        position="0 1.276 -0.5"
+        rotation="-20 0 0"></a-entity>
+        <a-plane color="#999999"
+        rotation ="-90 0 0 "
+        scale="1000 1000 1"></a-plane>
+    </a-scene>
+    <!--
+      <h1>A-Frame Super Keyboard</h1>
+
+    <ul>
+      <li>
+        <a href="examples/basic"><img src="examples/basic/thumb.jpg">Basic</a>
+      </li>
+      
+    </ul>
+    -->
+    
+
+    
+  </body>
 </html>
