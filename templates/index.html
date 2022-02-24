@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>A-Frame Super Keyboard</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!--
     <script src="https://rawgit.com/aframevr/aframe/c4aa63e/dist/aframe-master.min.js"></script>
     <script src="{{ url_for('static', filename = 'aframe-super-keyboard.min.js') }}"></script>
+    -->
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>a
+    <script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
-    
+    <!--
     <script>
       AFRAME.registerComponent('wood-keyboard', {
         dependencies: ['super-keyboard'],
@@ -19,32 +20,37 @@
         }
       });
     </script>
+    -->
   </head>
   <body>
     <a-scene>
-      <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
-
-      <a-entity id="rightHand" laser-controls="right"></a-entity>
-      <a-entity id="leftHand" laser-controls="left"></a-entity>
-
-      <!-- Change hand to `#hand` for VR. -->
+      <a-camera>
+        <a-entity id="mouseCursor"
+        cursor="rayOrigin: mouse">
+        </a-entity>
+      </a-camera>
         <a-plane color="#999999"
-        rotation ="-90 0 0 "
+        rotation ="-90 0 0 "s
         scale="1000 1000 1"></a-plane>
+      {% if out %}
         {% for mol in out[1] %}
             <a-box 
                 id="button{{mol}}"
-                position="{{loop.index}} 1 1"
+                position="-6 0.5 {{loop.index*-5}}"
                 color="grey"
+                height="0.5"
+                width="0.5"
+                depth="0.2"
                 event-set__trendenter="_event: mouseenter; _target: #{{mol}}trend; visible: true"
                 event-set__trendleave="_event: mouseleave; _target: #{{mol}}trend; visible: false">
                 <a-text value="show trend \nfor {{mol}}"
-                position="0 0 0.5"
+                position="0 0 0.1"
                 align="center"
                 height="2"
                 width="2"></a-text>
             </a-box>
         {% endfor %}
+
         {% set xmin = 3 %}
         {% set xmax = 4 %}
         {% set ymin = 5 %}
@@ -88,20 +94,6 @@
             height="20"
             width="20">
         </a-text>
-        <a-box position="-5 1 {{(vr.var*-5)+0.5}}"
-            width="3"
-            height="2"
-            depth="2"
-            visible="false"
-            event-set__userenter="_event: cameraenter; _target: #button{{vr.var}}; visible: true"
-            event-set__userleave="_event: cameraleave; _target: #button{{vr.var}}; visible: false">
-        </a-box>
-        <a-gui-button 
-            id="button{{vr.var}}"
-            position="-5 1 {{(vr.var*-5)+0.5}}"
-            value="show trend"
-            visible="false">
-        </a-gui-button>
             {% for val in lst %}
             {% set ns.id=ns.id+1 %}
             <a-sphere id="ball{{ns.id}}"
@@ -125,6 +117,7 @@
             </a-sphere>
             {% endfor %}
         {% endfor %}
+        <!--
         <a-entity
         id="keyboard"
         super-keyboard="hand: #mouseCursor; imagePath:{{ url_for('static', filename = '') }}; keyColor: #fff; inputColor: #97f079; label: Hello! Please Enter Here:; labelColor: #c9b08b; keyPressColor: #fff; keyHoverColor: #3a3521; font: roboto; blinkingSpeed: 100; align: center;"
@@ -134,6 +127,8 @@
         <a-plane color="#999999"
         rotation ="-90 0 0 "
         scale="1000 1000 1"></a-plane>
+        -->
+      {% endif %}
     </a-scene>
     <!--
       <h1>A-Frame Super Keyboard</h1>
