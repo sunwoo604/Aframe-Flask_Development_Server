@@ -73,8 +73,10 @@ def DataPh(name):
     points=[]
     #scales for actual trend
     scales=[]
+    minmax=[]
     for i in out:
         scales.append(10/(max(i)-min(i)))
+        minmax.append([max(i),min(i)])
     #string value for a-lines
     for i in range(len(scales)):
         temp=""
@@ -83,7 +85,7 @@ def DataPh(name):
                 temp+=", "
             temp+=str((pH_meas[j]-min_pH)*xscale)+" "+str((out[i][j]-min_out)*scales[i])+" "+str(-5*(i+1))
         points.append(temp)
-    return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out, xscale, yscale, xaxis, yaxis, points)
+    return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out, xscale, yscale, xaxis, yaxis, points,minmax)
 
     
 # def add(a, lst):
