@@ -35,17 +35,32 @@
         scale="1000 1000 1"></a-plane>
         <!--Slider for percent-->
         <a-gui-slider id="sld" width="2.5" height="0.75" 
-        onclick="func()" margin="0 0 0.05 0" position="-2 1 1"
+        onclick="func(this)" margin="0 0 0.05 0" position="-2 1 1"
         percent="0.29">
         <script type="text/javascript">
-          function func(){
-            var data = document.getElementById('sld').data;
-            let c = document.getElementById('sldperc');
-            c.setAttribute("value", `${data.percent}`);
+          function func(el){
+            var perc = el.getAttribute("gui-slider").percent.toFixed(2);
+            for(let i = 1;i<1000*perc;i++)
+            {
+              for(let j = 0;j<5;j++)
+              {
+                let temp = j*1001+i;
+                let ball = document.getElementById("ball"+temp);
+                ball.setAttribute("visible", "true");
+              }
+            }
+            for(let i = 1000*perc+1;i<1002;i++)
+            {
+              for(let j = 0;j<5;j++)
+              {
+                let temp = j*1001+i;
+                let ball = document.getElementById("ball"+temp);
+                ball.setAttribute("visible", "false");
+              }
+            }
           }
         </script>
         </a-gui-slider>
-        <a-text id="sldperc" value="A" position="-3 2 1" color="black"></a-text>
       {% if out %}
       <!--Magic numbers-->
         {% set xmin = 3 %}
@@ -78,7 +93,7 @@
                 let line = document.getElementById(mol+'trend');
                 let index=parseInt(idx);
                 line.setAttribute("visible", "true");
-                for(let i = 1001*index+1;i<1001*(index+1)+1;i++)
+                for(let i = 1001*index+1;i<1000*(index+1)+1;i++)
                 {
                   let ball = document.getElementById("ball"+i);
                   ball.setAttribute("visible", "false");
