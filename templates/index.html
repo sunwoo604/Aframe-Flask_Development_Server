@@ -2,25 +2,10 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <!--
-    <script src="https://rawgit.com/aframevr/aframe/c4aa63e/dist/aframe-master.min.js"></script>
-    <script src="{{ url_for('static', filename = 'aframe-super-keyboard.min.js') }}"></script>
-    -->
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>
-    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
-    <!--
-    <script>
-      AFRAME.registerComponent('wood-keyboard', {
-        dependencies: ['super-keyboard'],
-        init: function(){
-          var model = { wrapCount: 35, inputOffsetY: 0.003, inputOffsetX: 0, img: "wood.png", layout: [{"key":"Insert", "x":0.023, "y":0.038, "w":0.956, "h":0.126}, {"key":" :-) ", "x":0.027, "y":0.214, "w":0.083, "h":0.148}, {"key":" :-O ", "x":0.124, "y":0.214, "w":0.083, "h":0.148}, {"key":" X-D ", "x":0.23, "y":0.214, "w":0.107, "h":0.148}, {"key":" ¯\\_('_')_/¯ ", "x":0.344, "y":0.214, "w":0.207, "h":0.148}, {"key":" ^_^ ", "x":0.563, "y":0.214, "w":0.114, "h":0.148}, {"key":"!", "x":0.686, "y":0.207, "w":0.079, "h":0.152}, {"key":"?", "x":0.766, "y":0.207, "w":0.079, "h":0.152}, {"key":"Delete", "x":0.865, "y":0.239, "w":0.108, "h":0.146}, {"key":"Enter", "x":0.866, "y":0.479, "w":0.108, "h":0.244}, {"key":"Escape", "x":0.883, "y":0.828, "w":0.078, "h":0.134}, {"key":"Shift", "x":0.021, "y":0.833, "w":0.068, "h":0.142}, {"key":" ", "x":0.266, "y":0.85, "w":0.415, "h":0.126}, {"key":"q", "x":0.049, "y":0.389, "w":0.079, "h":0.152}, {"key":"w", "x":0.128, "y":0.389, "w":0.079, "h":0.152}, {"key":"e", "x":0.208, "y":0.389, "w":0.079, "h":0.152}, {"key":"r", "x":0.287, "y":0.389, "w":0.08, "h":0.152}, {"key":"t", "x":0.368, "y":0.389, "w":0.079, "h":0.152}, {"key":"y", "x":0.447, "y":0.389, "w":0.079, "h":0.152}, {"key":"u", "x":0.526, "y":0.389, "w":0.079, "h":0.152}, {"key":"i", "x":0.606, "y":0.389, "w":0.08, "h":0.152}, {"key":"o", "x":0.686, "y":0.389, "w":0.079, "h":0.152}, {"key":"p", "x":0.766, "y":0.389, "w":0.079, "h":0.152}, {"key":"a", "x":0.097, "y":0.541, "w":0.08, "h":0.154}, {"key":"s", "x":0.176, "y":0.541, "w":0.08, "h":0.154}, {"key":"d", "x":0.256, "y":0.541, "w":0.08, "h":0.154}, {"key":"f", "x":0.336, "y":0.541, "w":0.079, "h":0.154}, {"key":"g", "x":0.415, "y":0.541, "w":0.08, "h":0.154}, {"key":"h", "x":0.495, "y":0.541, "w":0.079, "h":0.154}, {"key":"j", "x":0.575, "y":0.541, "w":0.079, "h":0.154}, {"key":"k", "x":0.654, "y":0.541, "w":0.08, "h":0.154}, {"key":"l", "x":0.734, "y":0.541, "w":0.08, "h":0.154}, {"key":"z", "x":0.177, "y":0.696, "w":0.079, "h":0.154}, {"key":"x", "x":0.256, "y":0.696, "w":0.08, "h":0.154}, {"key":"c", "x":0.336, "y":0.696, "w":0.079, "h":0.154}, {"key":"v", "x":0.415, "y":0.696, "w":0.08, "h":0.154}, {"key":"b", "x":0.495, "y":0.696, "w":0.08, "h":0.154}, {"key":"n", "x":0.575, "y":0.696, "w":0.079, "h":0.154}, {"key":"m", "x":0.654, "y":0.696, "w":0.08, "h":0.154}]};
-          this.el.components['super-keyboard'].addCustomModel('wood', model);
-          this.el.setAttribute('super-keyboard', {imagePath: '.', model: 'wood'});
-        }
-      });
-    </script>
-    -->
+    <script src="{{ url_for('static', filename = 'aframe-gui.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'functions.js') }}"></script>
   </head>
   <body>
     <a-scene>
@@ -37,30 +22,22 @@
         <a-gui-slider id="sld" width="2.5" height="0.75" 
         onclick="func(this)" margin="0 0 0.05 0" position="-2 1 1"
         percent="0.29">
-        <script type="text/javascript">
-          function func(el){
-            var perc = el.getAttribute("gui-slider").percent.toFixed(2);
-            for(let i = 1;i<1000*perc;i++)
-            {
-              for(let j = 0;j<5;j++)
-              {
-                let temp = j*1001+i;
-                let ball = document.getElementById("ball"+temp);
-                ball.setAttribute("visible", "true");
-              }
-            }
-            for(let i = 1000*perc+1;i<1002;i++)
-            {
-              for(let j = 0;j<5;j++)
-              {
-                let temp = j*1001+i;
-                let ball = document.getElementById("ball"+temp);
-                ball.setAttribute("visible", "false");
-              }
-            }
-          }
-        </script>
         </a-gui-slider>
+      
+      <a-text id="numWindow" 
+      value=""
+      position="5 1 0"
+      geometry="primitive: plane; width: 2; height: 0.5"
+      material = "color: grey"
+      align="center">
+      </a-text>
+      <a-text value="5" 
+      geometry="primitive: plane; width: 0.5; height: 0.5"
+      material = "color: grey"
+      onclick="inputNum(this)"
+      position="4 1 0"
+      align="center">
+      </a-text>
       {% if out %}
       <!--Magic numbers-->
         {% set xmin = 3 %}
@@ -134,6 +111,7 @@
             width="2"></a-text>
         </a-box>
         <!--Min max buttons and windows-->
+        <!--
         <a-text 
           position="{{loop.index-1}} 1 1" value="{{mol}}" 
           geometry="primitive: plane; width: 1; height: 1"
@@ -153,6 +131,7 @@
           value="max: {{out[minmax][loop.index-1][0]}} \nmin: {{out[minmax][loop.index-1][1]}}">
         </a-text>
         {% endfor %}
+        -->
 
         <!--Trend lines-->
         {% for points in out[points] %}
@@ -215,31 +194,7 @@
             </a-sphere>
             {% endfor %}
         {% endfor %}
-        <!--
-        <a-entity
-        id="keyboard"
-        super-keyboard="hand: #mouseCursor; imagePath:{{ url_for('static', filename = '') }}; keyColor: #fff; inputColor: #97f079; label: Hello! Please Enter Here:; labelColor: #c9b08b; keyPressColor: #fff; keyHoverColor: #3a3521; font: roboto; blinkingSpeed: 100; align: center;"
-        wood-keyboard
-        position="0 1.276 -0.5"
-        rotation="-20 0 0"></a-entity>
-        <a-plane color="#999999"
-        rotation ="-90 0 0 "
-        scale="1000 1000 1"></a-plane>
-        -->
       {% endif %}
-    </a-scene>
-    <!--
-      <h1>A-Frame Super Keyboard</h1>
-
-    <ul>
-      <li>
-        <a href="examples/basic"><img src="examples/basic/thumb.jpg">Basic</a>
-      </li>
-      
-    </ul>
-    -->
-    
-
-    
+    </a-scene>   
   </body>
 </html>
