@@ -12,15 +12,17 @@ def home():
 @app.route("/result", methods=['POST','GET'])
 def result():
     output = request.form.to_dict()
-    num = output["name"]
-    data=dp.DataPh(num)
+    name = output["name"]
+    num=output["num"]
+    data=dp.DataPh(name,num)
 
     return render_template("index.html", out=data)
 
 @app.route('/ajax', methods = ['POST'])
 def ajax_request():
+    name = request.form["name"]
     num=request.form['num']
-    data=dp.DataPh(num)
+    data=dp.DataPh(name,num)
     return jsonify(out=data)
 
 if __name__=='__main__':

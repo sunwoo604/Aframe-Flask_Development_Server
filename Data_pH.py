@@ -3,8 +3,18 @@
 import math
 import numpy as np
 
-def DataPh(num):
-    spec_names = ['A', 'H', 'AH', 'H2A', 'OH']
+prevnum = ""
+prevmols = ""
+
+def DataPh(mol,num):
+    if len(mol)<2:
+        mols="A,H".split(',')
+    else:
+        mols=mol.split(',')
+    if len(num)==0:
+        num=0
+    
+    spec_names=[mols[0],mols[1],mols[0]+mols[1],mols[1]+"2"+mols[0],"O"+mols[1]]
     Model = [[1, 0,1,1,0], [0,1,1,2,-1]]
     log_beta = np.array([0, int(num), 10, 17, -14.0744])
 
@@ -83,6 +93,8 @@ def DataPh(num):
                 temp+=", "
             temp+=str((pH_meas[j]-min_pH)*xscale)+" "+str((out[i][j]-min_out)*scales[i])+" "+str(-5*(i+1))
         points.append(temp)
+    max_pH = max(pH_meas)
+    min_pH = min(pH_meas)
     return (out,spec_names,pH_meas, min_pH, max_pH, min_out, max_out, xscale, yscale, xaxis, yaxis, points,minmax)
 
     
