@@ -14,8 +14,16 @@ const xstep = 9
 const ystep = 10 
 const points = 11 
 const minmax = 12
+
 function submit()
 {
+    if(log_beta.length==0&&molecules.length==0)
+    {
+        return false;
+    }
+    if(!molecules.includes(',')&&molecules.length>0){
+        return false;
+    }
     var req = new XMLHttpRequest();
     req.onreadystatechange = function()
     {
@@ -23,8 +31,9 @@ function submit()
         console.log(response)
         log_beta=""
         molecules=""
-        out=response;
+        out=response["out"];
         graph();
+        trend();
         clear();
     }               
     req.open('POST', '/ajax');
@@ -35,24 +44,34 @@ function submit()
 
 function graph(){
     let id=0;
-    let output= out["out"]
     for(let i=0;i<5;i++){
-        for(let j=0;j<1001;j++)
+        var tempLabel=document.getElementById(i+"label");
+        tempLabel.setAttribute("value", out[mols][i])
+        for(let j=0;j<1002;j++)
         {
             id+=1
             var temp=document.getElementById("ball"+id)
-            var xco=(parseFloat(output[ph][j])-parseFloat(output[xmin]))*parseFloat(output[xscale])
-            var yco=(parseFloat(output[concen][i][j])*parseFloat(output[yscale]))
+            var xco=(parseFloat(out[ph][j])-parseFloat(out[xmin]))*parseFloat(out[xscale])
+            var yco=(parseFloat(out[concen][i][j])*parseFloat(out[yscale]))
             var zco=(i+1)*(-5)
             temp.setAttribute("position",xco+" "+yco+" "+zco)
-            console.log(xco+" "+yco+" "+zco)
+            var tempData = document.getElementById("data"+id)
+            tempData.setAttribute("value","m: "+out[mols][i]+" ph: "+out[ph][j]+" c: "+out[concen][i][j])
         }
-        console.log(i+"done")
     }
 }
 
 function trend(){
-
+    console.log(out[points])
+    for(let i=0;i<out[points].length;i++)
+    {
+        var temp = document.getElementById(i+"trend")
+        temp.setAttribute("points",out[points][i])
+        var button = document.getElementById("button"+i)
+        var button2 = document.getElementById("button2"+i)
+        button.setAttribute("value","show trend \nfor "+out[mols][i])
+        button2.setAttribute("value","show datas \nfor "+out[mols][i])
+    }
 }
 
 function inputNum(el){
@@ -62,7 +81,17 @@ function inputNum(el){
 
 function inputMol(el){
     molecules+=el.getAttribute("value")
-    document.getElementById("molWindow").setAttribute("value",log_beta)
+    document.getElementById("molWindow").setAttribute("value",molecules)
+}
+
+function delNum(){
+    log_beta=log_beta.substring(0,log_beta.length-1)
+    document.getElementById("numWindow").setAttribute("value",log_beta)
+}
+
+function delMol(){
+    molecules=molecules.substring(0,molecules.length-1)
+    document.getElementById("molWindow").setAttribute("value",molecules)
 }
 
 function clear()

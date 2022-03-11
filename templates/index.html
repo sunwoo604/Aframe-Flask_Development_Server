@@ -6,6 +6,7 @@
     <script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>
     <script src="{{ url_for('static', filename = 'aframe-gui.js') }}"></script>
     <script src="{{ url_for('static', filename = 'functions.js') }}"></script>
+    <script src="https://codechangers.com/physics.js"></script>
   </head>
   <body>
     <a-scene>
@@ -20,39 +21,128 @@
         scale="1000 1000 1"></a-plane>
         <!--Slider for percent-->
         <a-gui-slider id="sld" width="2.5" height="0.75" 
-        onclick="func(this)" margin="0 0 0.05 0" position="-2 1 1"
+        onclick="func(this)" margin="0 0 0.05 0" position="-2 1 -1"
         percent="0.29">
         </a-gui-slider>
       <!--User input for log beta-->
-      <a-text id="numWindow" 
-      value=""
-      position="5 1 0"
-      geometry="primitive: plane; width: 2; height: 0.5"
-      material = "color: grey"
-      align="center">
       </a-text>
       <!--User input for molecules-->
-      <a-text id="molWindow" 
-      value=""
-      position="5 2 0"
-      geometry="primitive: plane; width: 2; height: 0.5"
-      material = "color: grey"
-      align="center">
-      </a-text>
-      <a-text
-      onclick="submit()"
-      position="8 2 0"
-      geometry="primitive: plane; width: 2; height: 0.5"
-      material = "color: grey"
-      align="center">
-      </a-text>
-      <a-text value="0" 
-      geometry="primitive: plane; width: 0.5; height: 0.5"
-      material = "color: grey"
-      onclick="inputNum(this)"
-      position="4 1 0"
-      align="center">
-      </a-text>
+      <!--Log beta input-->
+      <a-entity id="numpad" position="1 1.5 -1">
+        <a-text id="numWindow" 
+        value=""
+        position="0 1 0"
+        geometry="primitive: plane; width: 1.4; height: 0.4"
+        material = "color: black"
+        align="center"></a-text>
+        <a-text value="7" position="-0.5, 0.5, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="8" position="0, 0.5, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="9" position="0.5, 0.5, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="4" position="-0.5, 0, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="5" position="0, 0, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="6" position="0.5, 0, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="1" position="-0.5, -0.5, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="2" position="0, -0.5, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="3" position="0.5, -0.5, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="0" position="-0.5, -1, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="." position="0, -1, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+        <a-text value="DEL" position="0.5, -1, 0"
+        geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="delNum()" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
+        </a-text>
+      </a-entity>
+      <!--keyboard-->
+      <a-entity id="keyboard" position="-5 0 -1">
+        <a-text id="molWindow" 
+        value=""
+        position="10 2.5 0"
+        geometry="primitive: plane; width: 2; height: 0.5"
+        material = "color: black"
+        align="center">
+        </a-text>
+        {% set cen = [9.55,1.5,0] %}
+        <a-text value="G" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>    
+        <a-text value="Q" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+0.5}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="W" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+1}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="E" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+1.5}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="R" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+2}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="T" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+2.5}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="Y" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+3}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="U" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+3.5}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="I" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+4}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="O" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+4.5}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="P" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.7+5}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="Back" geometry="primitive: plane; width: 0.8; height: 0.4" material = "color: grey" onclick="delMol()" event-set__enter="_event: mouseenter; geometry.width: 0.6; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.8; geometry.height: 0.4" position="{{cen[0]+3}} {{cen[1]+0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="A" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+0.5}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="S" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+1}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="D" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+1.5}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="F" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+2}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="H" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+3}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="J" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+3.5}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="K" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+4}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="L" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+4.5}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="Enter" geometry="primitive: plane; width: 1.1; height: 0.4" material = "color: grey" onclick="submit()" event-set__enter="_event: mouseenter; geometry.width: 0.9; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 1.1; geometry.height: 0.4" position="{{cen[0]+2.85}} {{cen[1]}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="Z" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+0.5}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="X" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+1}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="C" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+1.5}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="V" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+2}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="B" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+2.5}} {{cen[1]-0.5}} {{cen[2]}}"align="center">
+        </a-text>
+        <a-text value="N" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+3}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="M" geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+3.5}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="," geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+4}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+        <a-text value="." geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputMol(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" position="{{cen[0]-2.5+4.5}} {{cen[1]-0.5}} {{cen[2]}}" align="center">
+        </a-text>
+      </a-entity>
       {% if out %}
       <!--Magic numbers-->
         {% set xmin = 3 %}
@@ -72,7 +162,6 @@
         {% for mol in out[1] %}
         <!--Trend visibility button-->
         <a-box 
-            id="button{loop.index-1}}"
             position="-6 0.5 {{loop.index*-5}}"
             color="grey"
             height="0.5"
@@ -84,21 +173,21 @@
                 let line = document.getElementById(idx+'trend');
                 let index=parseInt(idx);
                 line.setAttribute("visible", "true");
-                for(let i = 1001*index+1;i<1000*(index+1)+1;i++)
+                for(let i = 1001*index+1;i<1000*(index+1)+2;i++)
                 {
                   let ball = document.getElementById("ball"+i);
                   ball.setAttribute("visible", "false");
                 }
               }
             </script>
-            <a-text value="show trend \nfor {{mol}}"
+            <a-text id="button{loop.index-1}}"
+            value="show trend \nfor {{mol}}"
             position="0 0 0.1"
             align="center"
             height="2"
             width="2"></a-text>
         </a-box>
         <a-box 
-            id="button2{{loop.index}}"
             position="-5.5 0.5 {{loop.index*-5}}"
             color="grey"
             height="0.5"
@@ -118,7 +207,8 @@
                 }
               }
             </script>
-            <a-text value="show datas \nfor {{mol}}"
+            <a-text id="button2{{loop.index-1}}"
+            value="show datas \nfor {{mol}}"
             position="0 0 0.1"
             align="center"
             height="2"
