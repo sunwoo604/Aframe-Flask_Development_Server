@@ -1,5 +1,11 @@
-let log_beta=""
+let beta1=""
+let beta2=""
+let c01=""
+let c02=""
+let cadded0=""
+let cadded1=""
 let molecules=""
+let window=0
 let out=[]
 const concen=0
 const mols = 1
@@ -42,7 +48,40 @@ function submit()
     req.send(postVars);                       
 }
 
+function window(num){
+    window=num;
+}
+
 function graph(){
+    /*for(let i=0;i<5;i++)
+    {
+        for(let j=0;j<15;j++)
+        {
+            var tempStep = document.getElementById(i+"xstep"+j)
+            if(tempStep!=null){
+                tempStep.remove()
+                console.log(i+"removed!"+j)
+            }
+        }
+    }
+    for(let i=0;i<5;i++)
+    {
+        for(let j=0;j<out[xstep].length;j++)
+        {
+            const newStep = document.createElement("a-text")
+            newStep.setAttribute("id",i+"xstep"+out[xstep][j])
+            document.getElementById("x-axis").appendChild(newStep)
+            newStep.setAttribute("value",out[xstep][j]) 
+            let xco=(out[xstep][j]-out[xmin])*out[xscale]
+            let zco=(i+1)*(-5)
+            newStep.setAttribute("position",xco*+" 0.2 "+zco)
+            newStep.setAttribute("color","black")
+            newStep.setAttribute("align","center")
+            newStep.setAttribute("height","5")
+            newStep.setAttribute("width","5")
+        }
+    }
+    */
     let id=0;
     for(let i=0;i<5;i++){
         var tempLabel=document.getElementById(i+"label");
@@ -75,8 +114,11 @@ function trend(){
 }
 
 function inputNum(el){
-    log_beta+=el.getAttribute("value")
-    document.getElementById("numWindow").setAttribute("value",log_beta)
+    if(window==1){
+        log_beta+=el.getAttribute("value")
+        document.getElementById("numWindow").setAttribute("value",log_beta)
+    }
+    
 }
 
 function inputMol(el){

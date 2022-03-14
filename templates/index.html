@@ -27,14 +27,59 @@
       <!--User input for log beta-->
       </a-text>
       <!--User input for molecules-->
-      <!--Log beta input-->
-      <a-entity id="numpad" position="1 1.5 -1">
-        <a-text id="numWindow" 
+      <a-entity>
+        <a-text id="beta1" 
         value=""
         position="0 1 0"
         geometry="primitive: plane; width: 1.4; height: 0.4"
         material = "color: black"
+        onclick="window(0)"
         align="center"></a-text>
+        <a-text id="beta2" 
+        value=""
+        position="0 1 0"
+        geometry="primitive: plane; width: 1.4; height: 0.4"
+        material = "color: black"
+        onclick="window(1)"
+        align="center"></a-text>
+        <a-text id="c01" 
+        value=""
+        position="0 1 0"
+        geometry="primitive: plane; width: 1.4; height: 0.4"
+        material = "color: black"
+        onclick="window(2)"
+        align="center"></a-text>
+        <a-text id="c02" 
+        value=""
+        position="0 1 0"
+        geometry="primitive: plane; width: 1.4; height: 0.4"
+        material = "color: black"
+        onclick="window(3)"
+        align="center"></a-text>
+        <a-text id="c02" 
+        value=""
+        position="0 1 0"
+        geometry="primitive: plane; width: 1.4; height: 0.4"
+        material = "color: black"
+        onclick="window(4)"
+        align="center"></a-text>
+        <a-text id="cadded0" 
+        value=""
+        position="0 1 0"
+        geometry="primitive: plane; width: 1.4; height: 0.4"
+        material = "color: black"
+        onclick="window(5)"
+        align="center"></a-text>
+        <a-text id="cadded1" 
+        value=""
+        position="0 1 0"
+        geometry="primitive: plane; width: 1.4; height: 0.4"
+        material = "color: black"
+        onclick="window(6)"
+        align="center"></a-text>
+      </a-entity>
+      <!--Number input-->
+      <a-entity id="numpad" position="1 1.5 -1">
         <a-text value="7" position="-0.5, 0.5, 0"
         geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
         </a-text>
@@ -250,21 +295,24 @@
         {% for lst in out[0] %}
         {% set vr = namespace(var=loop.index) %}
         <!--x and y axis-->
-        <a-box color="black" height="20" width="0.02" depth="0.02" position="0 0 {{vr.var*-5}}"></a-box>
-        <a-box color="black" height="10" width="0.02" depth="0.02" position="5 0 {{vr.var*-5}}" rotation="0 0 90"></a-box>
+        <a-box id="y-axis" color="black" height="20" width="0.02" depth="0.02" position="0 0 {{vr.var*-5}}">
+          {% for y in out[ystep] %}
+          <a-text value="{{y}}" 
+          position="0 {{(loop.index-1)*2}} 0"
+          color="black" align="center"
+          height="5"
+          width="5"></a-text>
+          {% endfor %}
+        </a-box>
+        <a-box id="x-axis" color="black" height="10" width="0.02" depth="0.02" position="5 0 {{vr.var*-5}}" rotation="0 0 90">
+        </a-box>
         {% for x in out[xstep] %}
-        <a-text value="{{x}}" 
-        position="{{(x-out[xmin])*sc.xscale}} 0.2 {{vr.var*-5}}"
-        color="black" align="center"
-        height="5"
-        width="5"></a-text>
-        {% endfor %}
-        {% for y in out[ystep] %}
-        <a-text value="{{y}}" 
-        position="0 {{(loop.index-1)*2}} {{vr.var*-5+0.5}}"
-        color="black" align="center"
-        height="5"
-        width="5"></a-text>
+          <a-text id="{{vr.var-1}}xstep{{x}}"
+          value="{{x}}" 
+          position="{{(x-out[xmin])*sc.xscale}} 0.2 {{vr.var*-5}}"
+          color="black" align="center"
+          height="5"
+          width="5"></a-text>
         {% endfor %}
 
         <!--Molecules labels-->

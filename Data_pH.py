@@ -3,23 +3,18 @@
 import math
 import numpy as np
 
-def DataPh(mol,num):
-    if len(mol)<2:
-        mols="A,H".split(',')
-    else:
-        mols=mol.split(',')
-    if len(num)==0:
-        num=0
+def DataPh(mol,beta1,beta2,c01,c02,cadded0,cadded1):
+    mols=mol.split(',')
     
     spec_names=[mols[0],mols[1],mols[0]+mols[1],mols[1]+"2"+mols[0],"O"+mols[1]]
     Model = [[1, 0,1,1,0], [0,1,1,2,-1]]
-    log_beta = np.array([0, int(num), 10, 17, -14.0744])
+    log_beta = np.array([float(beta1), float(beta2), 10, 17, -14.0744])
 
     beta = []
     for i in log_beta:
         beta.append(10 ** i)
-    c0 = [0.01, 0.02]
-    c_added = [0, -0.15]
+    c0 = [float(c01), float(c02)]
+    c_added = [float(cadded0), float(cadded1)]
 
     ncomp = len(c0)
     v0 = 0.05
