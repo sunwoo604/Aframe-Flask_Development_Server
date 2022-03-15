@@ -68,6 +68,8 @@ def DataPh(mol,beta1,beta2,c01,c02,cadded0,cadded1):
         xaxis.append(i+min_pH)
     #calculating the position sclae
     max_pH=max(xaxis)
+    max_pH = max(pH_meas)
+    min_pH = min(pH_meas)
     xscale=10/(max_pH-min_pH)
     yscale=10/(max_out-min_out)
     points=[]
@@ -77,8 +79,6 @@ def DataPh(mol,beta1,beta2,c01,c02,cadded0,cadded1):
     for i in out:
         scales.append(10/(max(i)-min(i)))
         minmax.append([max(i),min(i)])
-    max_pH = max(pH_meas)
-    min_pH = min(pH_meas)
     #string value for a-lines
     for i in range(len(scales)):
         temp=""
