@@ -6,7 +6,6 @@
     <script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>
     <script src="{{ url_for('static', filename = 'aframe-gui.js') }}"></script>
     <script src="{{ url_for('static', filename = 'functions.js') }}"></script>
-    <script src="https://codechangers.com/physics.js"></script>
   </head>
   <body>
     <a-scene>
@@ -21,65 +20,34 @@
         scale="1000 1000 1"></a-plane>
         <!--Slider for percent-->
         <a-gui-slider id="sld" width="2.5" height="0.75" 
-        onclick="func(this)" margin="0 0 0.05 0" position="-2 1 -1"
+        onclick="func(this)" margin="0 0 0.05 0" position="17 3.5 -2"
         percent="0.29">
         </a-gui-slider>
       <!--User input for log beta-->
       </a-text>
       <!--User input for molecules-->
-      <a-entity>
-        <a-text id="beta1" 
-        value=""
-        position="0 1 0"
-        geometry="primitive: plane; width: 1.4; height: 0.4"
-        material = "color: black"
-        onclick="window(0)"
-        align="center"></a-text>
-        <a-text id="beta2" 
-        value=""
-        position="0 1 0"
-        geometry="primitive: plane; width: 1.4; height: 0.4"
-        material = "color: black"
-        onclick="window(1)"
-        align="center"></a-text>
-        <a-text id="c01" 
-        value=""
-        position="0 1 0"
-        geometry="primitive: plane; width: 1.4; height: 0.4"
-        material = "color: black"
-        onclick="window(2)"
-        align="center"></a-text>
-        <a-text id="c02" 
-        value=""
-        position="0 1 0"
-        geometry="primitive: plane; width: 1.4; height: 0.4"
-        material = "color: black"
-        onclick="window(3)"
-        align="center"></a-text>
-        <a-text id="c02" 
-        value=""
-        position="0 1 0"
-        geometry="primitive: plane; width: 1.4; height: 0.4"
-        material = "color: black"
-        onclick="window(4)"
-        align="center"></a-text>
-        <a-text id="cadded0" 
-        value=""
-        position="0 1 0"
-        geometry="primitive: plane; width: 1.4; height: 0.4"
-        material = "color: black"
-        onclick="window(5)"
-        align="center"></a-text>
-        <a-text id="cadded1" 
-        value=""
-        position="0 1 0"
-        geometry="primitive: plane; width: 1.4; height: 0.4"
-        material = "color: black"
-        onclick="window(6)"
-        align="center"></a-text>
+      <a-entity position="13.5 1 -2">
+        <a-text id="beta1" value="" position="0 2.5 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(0)" align="center">
+          <a-text value="beta 1: " position="-1.5 0 0" align="center" color="black"></a-text>
+        </a-text>
+        <a-text id="beta2" value="" position="0 2 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(1)" align="center">
+          <a-text value="beta 2: " position="-1.5 0 0" align="center" color="black"></a-text>
+        </a-text>
+        <a-text id="c01" value="" position="0 1.5 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(2)" align="center">
+          <a-text value="initial c 1: " position="-1.5 0 0" align="center" color="black"></a-text>
+        </a-text>
+        <a-text id="c02" value="" position="0 1 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(3)" align="center">
+          <a-text value="initial c 2: " position="-1.5 0 0" align="center" color="black"></a-text>
+        </a-text>
+        <a-text id="cadded0" value="" position="0 0.5 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(4)" align="center">
+          <a-text value="added c 1: " position="-1.5 0 0" align="center" color="black"></a-text>
+        </a-text>
+        <a-text id="cadded1" value="" position="0 0 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(5)" align="center">
+          <a-text value="added c 2: " position="-1.5 0 0" align="center" color="black"></a-text>
+        </a-text>
       </a-entity>
       <!--Number input-->
-      <a-entity id="numpad" position="1 1.5 -1">
+      <a-entity id="numpad" position="15.5 2 -2">
         <a-text value="7" position="-0.5, 0.5, 0"
         geometry="primitive: plane; width: 0.4; height: 0.4" material = "color: grey" onclick="inputNum(this)" event-set__enter="_event: mouseenter; geometry.width: 0.3; geometry.height: 0.3" event-set__leave="_event: mouseleave; geometry.width: 0.4; geometry.height: 0.4" align="center">
         </a-text>
@@ -118,7 +86,7 @@
         </a-text>
       </a-entity>
       <!--keyboard-->
-      <a-entity id="keyboard" position="-5 0 -1">
+      <a-entity id="keyboard" position="10 0 -2">
         <a-text id="molWindow" 
         value=""
         position="10 2.5 0"

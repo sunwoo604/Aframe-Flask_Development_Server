@@ -1,3 +1,4 @@
+
 let beta1=""
 let beta2=""
 let c01=""
@@ -5,7 +6,7 @@ let c02=""
 let cadded0=""
 let cadded1=""
 let molecules=""
-let window=0
+let windows=0
 let out=[]
 const concen=0
 const mols = 1
@@ -23,7 +24,7 @@ const minmax = 12
 
 function submit()
 {
-    if(log_beta.length==0&&molecules.length==0)
+    if(beta1.length==0&&molecules.length==0&&beta2.length==0&&c01.length==0&&c02.length==0&&cadded0.length==0&&cadded1.length==0)
     {
         return false;
     }
@@ -44,44 +45,15 @@ function submit()
     }               
     req.open('POST', '/ajax');
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-    var postVars = 'num='+log_beta+'&name='+molecules
+    var postVars = 'name='+molecules+'&beta1='+beta1+'&beta2='+beta2+'&c01='+c01+'&c02='+c02+'&cadded0='+cadded0+'&cadded1='+cadded1;
     req.send(postVars);                       
 }
 
-function window(num){
-    window=num;
+function wind(num){
+    windows=num
 }
 
 function graph(){
-    /*for(let i=0;i<5;i++)
-    {
-        for(let j=0;j<15;j++)
-        {
-            var tempStep = document.getElementById(i+"xstep"+j)
-            if(tempStep!=null){
-                tempStep.remove()
-                console.log(i+"removed!"+j)
-            }
-        }
-    }
-    for(let i=0;i<5;i++)
-    {
-        for(let j=0;j<out[xstep].length;j++)
-        {
-            const newStep = document.createElement("a-text")
-            newStep.setAttribute("id",i+"xstep"+out[xstep][j])
-            document.getElementById("x-axis").appendChild(newStep)
-            newStep.setAttribute("value",out[xstep][j]) 
-            let xco=(out[xstep][j]-out[xmin])*out[xscale]
-            let zco=(i+1)*(-5)
-            newStep.setAttribute("position",xco*+" 0.2 "+zco)
-            newStep.setAttribute("color","black")
-            newStep.setAttribute("align","center")
-            newStep.setAttribute("height","5")
-            newStep.setAttribute("width","5")
-        }
-    }
-    */
     let id=0;
     for(let i=0;i<5;i++){
         var tempLabel=document.getElementById(i+"label");
@@ -114,11 +86,32 @@ function trend(){
 }
 
 function inputNum(el){
-    if(window==1){
-        log_beta+=el.getAttribute("value")
-        document.getElementById("numWindow").setAttribute("value",log_beta)
+    if(windows==0){
+        beta1+=el.getAttribute("value")
+        console.log(beta1)
+        document.getElementById("beta1").setAttribute("value",beta1)
+        console.log(document.getElementById("beta1").getAttribute("value"))
     }
-    
+    else if(windows==1){
+        beta2+=el.getAttribute("value")
+        document.getElementById("beta2").setAttribute("value",beta2)
+    }
+    else if(windows==2){
+        c01+=el.getAttribute("value")
+        document.getElementById("c01").setAttribute("value",c01)
+    }
+    else if(windows==3){
+        c02+=el.getAttribute("value")
+        document.getElementById("c02").setAttribute("value",c02)
+    }
+    else if(windows==4){
+        cadded0+=el.getAttribute("value")
+        document.getElementById("cadded0").setAttribute("value",cadded0)
+    }
+    else if(windows==5){
+        cadded1+=el.getAttribute("value")
+        document.getElementById("cadded1").setAttribute("value",cadded1)
+    }
 }
 
 function inputMol(el){
@@ -127,8 +120,30 @@ function inputMol(el){
 }
 
 function delNum(){
-    log_beta=log_beta.substring(0,log_beta.length-1)
-    document.getElementById("numWindow").setAttribute("value",log_beta)
+    if(windows==0){
+        beta1=beta1.substring(0,beta1.length-1)
+        document.getElementById("beta1").setAttribute("value",beta1)
+    }
+    else if(windows==1){
+        beta2=beta2.substring(0,beta2.length-1)
+        document.getElementById("beta2").setAttribute("value",beta2)
+    }
+    else if(windows==2){
+        c01=c01.substring(0,c01.length-1)
+        document.getElementById("c01").setAttribute("value",c01)
+    }
+    else if(windows==3){
+        c02=c02.substring(0,c02.length-1)
+        document.getElementById("c02").setAttribute("value",c02)
+    }
+    else if(windows==4){
+        cadded=cadded0.substring(0,cadded0.length-1)
+        document.getElementById("cadded0").setAttribute("value",cadded0)
+    }
+    else if(windows==5){
+        cadded1=cadded1.substring(0,cadded1.length-1)
+        document.getElementById("cadded1").setAttribute("value",cadded1)
+    }
 }
 
 function delMol(){
@@ -138,8 +153,18 @@ function delMol(){
 
 function clear()
 {
-    log_beta=""
+    beta1=""
+    beta2=""
+    c01=""
+    c02=""
+    cadded0=""
+    cadded1=""
     molecules=""
     document.getElementById("molWindow").setAttribute("value",molecules)
-    document.getElementById("numWindow").setAttribute("value",log_beta)
+    document.getElementById("beta1").setAttribute("value",beta1)
+    document.getElementById("beta2").setAttribute("value",beta2)
+    document.getElementById("c01").setAttribute("value",c01)
+    document.getElementById("c02").setAttribute("value",c02)
+    document.getElementById("cadded0").setAttribute("value",cadded0)
+    document.getElementById("cadded1").setAttribute("value",cadded1)
 }
