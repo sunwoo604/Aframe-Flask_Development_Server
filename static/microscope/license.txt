@@ -1,0 +1,11 @@
+Model Information:
+* title:	Microscope
+* source:	https://sketchfab.com/3d-models/microscope-c31b39952c164baab5b34a07c76d1e4c
+* author:	dmonmx11 (https://sketchfab.com/dmonmx11)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Microscope" (https://sketchfab.com/3d-models/microscope-c31b39952c164baab5b34a07c76d1e4c) by dmonmx11 (https://sketchfab.com/dmonmx11) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

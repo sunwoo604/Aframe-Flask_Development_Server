@@ -1,0 +1,11 @@
+Model Information:
+* title:	Chemistry Set
+* source:	https://sketchfab.com/3d-models/chemistry-set-fd8e13456e2b442cba633b04f07b03b9
+* author:	Jake_26_26 (https://sketchfab.com/Jake_26_26)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Chemistry Set" (https://sketchfab.com/3d-models/chemistry-set-fd8e13456e2b442cba633b04f07b03b9) by Jake_26_26 (https://sketchfab.com/Jake_26_26) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
