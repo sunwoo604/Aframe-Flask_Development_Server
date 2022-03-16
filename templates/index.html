@@ -16,7 +16,6 @@
         </a-entity>
       </a-camera>
       <a-assets>
-        <a-asset-item id="sky" src="{{ url_for('static', filename = 'skypic.jpeg') }}"></a-asset-item>
         <a-asset-item id="condenser" src="{{ url_for('static', filename = 'condenser/scene.gltf') }}"></a-asset-item>
         <a-asset-item id="chemset" src="{{ url_for('static', filename = 'chemistry_set/scene.gltf') }}"></a-asset-item>
         <a-asset-item id="microscope" src="{{ url_for('static', filename = 'microscope/scene.gltf') }}"></a-asset-item>
@@ -27,6 +26,7 @@
         <a-asset-item id="door" src="{{ url_for('static', filename = 'hospital_door/scene.gltf') }}"></a-asset-item>
         <a-asset-item id="tablet" src="{{ url_for('static', filename = 'tablet/scene.gltf') }}"></a-asset-item>
       </a-assets>
+      <a-entity environment="preset: forest" position="0 -10 -5"></a-entity>
       <!--decoration-->
       <a-entity gltf-model="#condenser" scale="0.3 0.3 0.3" position="10 -1 -12"></a-entity>
       <a-entity gltf-model="#chemset" scale="0.03 0.03 0.03" position="9 0 -27.5"></a-entity>
@@ -51,22 +51,22 @@
       <!--User input for nums-->
       <a-entity position="16.5 1 -2">
         <a-text id="beta1" value="" position="0 2.5 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(0)" align="center">
-          <a-text value="beta 1: " position="-1.5 0 0" align="center" color="black"></a-text>
+          <a-text value="beta 1: " position="-1.5 0 0" align="center" color="white"></a-text>
         </a-text>
         <a-text id="beta2" value="" position="0 2 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(1)" align="center">
-          <a-text value="beta 2: " position="-1.5 0 0" align="center" color="black"></a-text>
+          <a-text value="beta 2: " position="-1.5 0 0" align="center" color="white"></a-text>
         </a-text>
         <a-text id="c01" value="" position="0 1.5 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(2)" align="center">
-          <a-text value="initial c 1: " position="-1.5 0 0" align="center" color="black"></a-text>
+          <a-text value="initial c 1: " position="-1.5 0 0" align="center" color="white"></a-text>
         </a-text>
         <a-text id="c02" value="" position="0 1 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(3)" align="center">
-          <a-text value="initial c 2: " position="-1.5 0 0" align="center" color="black"></a-text>
+          <a-text value="initial c 2: " position="-1.5 0 0" align="center" color="white"></a-text>
         </a-text>
         <a-text id="cadded0" value="" position="0 0.5 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(4)" align="center">
-          <a-text value="added c 1: " position="-1.5 0 0" align="center" color="black"></a-text>
+          <a-text value="added c 1: " position="-1.5 0 0" align="center" color="white"></a-text>
         </a-text>
         <a-text id="cadded1" value="" position="0 0 0" geometry="primitive: plane; width: 1.4; height: 0.4" material = "color: black" onclick="wind(5)" align="center">
-          <a-text value="added c 2: " position="-1.5 0 0" align="center" color="black"></a-text>
+          <a-text value="added c 2: " position="-1.5 0 0" align="center" color="white"></a-text>
         </a-text>
       </a-entity>
       <!--Number input-->
